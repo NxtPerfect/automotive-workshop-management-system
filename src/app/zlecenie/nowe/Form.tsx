@@ -36,7 +36,7 @@ export default function Form({ addService }) {
       <input className="text-black text-lg px-2 py-1 rounded-md" type="text" name="surname" placeholder="Kowalski" required></input>
       <label className="text-lg mt-2" htmlFor="phone">Numer Telefonu Właściciela</label>
       <input className="text-black text-lg px-2 py-1 rounded-md" type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" required></input>
-      <button className="bg-purple-800 shadow-md rounded-md p-2 px-4 text-xl mt-6">Dodaj</button>
+      <button className="bg-purple-800 hover:bg-purple-700 active:bg-purple-900 transition shadow-md rounded-md p-2 px-4 text-xl mt-6">Dodaj</button>
     </form>
   )
 }

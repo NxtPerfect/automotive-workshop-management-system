@@ -88,14 +88,14 @@ export default async function Services() {
                 <div className="flex flex-row gap-4">
                   <span className="flex flex-row self-center content-center">Pracownik: </span>
                   <Select workers={workers} service={service} changeWorker={changeWorker}/>
-                  <a className="flex bg-purple-600 w-fit rounded-md shadow-md text-white px-6 py-1" href={'zlecenie/' + service.id}>Zobacz szczegóły</a>
+                  <a className="flex bg-purple-600 hover:bg-purple-700 active:bg-purple-500 transition w-fit rounded-md shadow-md text-white px-6 py-1" href={'zlecenie/' + service.id}>Zobacz szczegóły</a>
                 </div>
               </div>
             </div>
           </>
         )
       })}
-      <a className="flex w-fit bg-purple-800 font-bold text-2xl rounded-md shadow-md text-white px-4 py-1" href='zlecenie/nowe'>+ Stwórz nowe zlecenie</a>
+      <a className="flex w-fit bg-purple-800 hover:bg-purple-900 active:bg-purple-700 transition font-bold text-2xl rounded-md shadow-md text-white px-4 py-1" href='zlecenie/nowe'>+ Stwórz nowe zlecenie</a>
     </>
   )
 }
