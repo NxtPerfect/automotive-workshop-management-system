@@ -30,6 +30,7 @@ export default interface Worker {
 export default async function Services() {
   const services = await getServices();
   const workers = await getWorkers();
+  console.log(services)
 
   async function changeWorker(serviceId: number, workerId: number) {
     'use server'

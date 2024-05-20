@@ -2,7 +2,6 @@
 import React from 'react'
 
 export default function Select({ workers, service, changeWorker }) {
-
   if (service.status) {
     return (
       <select className="bg-gray-400 text-gray-500 rounded-md shadow-md text-white px-4 py-1 w-fit" name="worker" disabled>
