@@ -1,6 +1,7 @@
 import { ChangeEvent } from "react";
 import Image from "next/image";
-import { getServices } from "../utils";
+import { getServices, getWorkers, updateWorker } from "../utils";
+import Select from "./Select";
 
 export const revalidate = 300;
 
@@ -19,13 +20,21 @@ export default interface Service {
   jobsId: number
 }
 
+export default interface Worker {
+  id: number,
+  name: string,
+  role: string
+}
+
 
 export default async function Services() {
   const services = await getServices();
+  const workers = await getWorkers();
 
-  function changeWorker(e: ChangeEvent<HTMLSelectElement>, id: number) {
-    // send request to api to change job with id to worker of
-    console.log("New worker for job", id, "is", e.target.value)
+  async function changeWorker(serviceId: number, workerId: number) {
+    'use server'
+    console.log(`New worker for job ${serviceId} is ${workerId}`)
+    await updateWorker(serviceId, workerId)
     return 0;
   }
 
@@ -37,7 +46,7 @@ export default async function Services() {
           <>
             <div className="flex flex-row bg-purple-300 p-4 rounded-md w-[75svw] h-fit mb-4" key={service.id}>
               <div className="flex relative overflow-hidden flex-row h-full">
-                <Image className="rounded-md bg-black h-full max-h-52 object-contain" src={"/images/" + service.model.toLowerCase() + service.year + ".jpg"} height={500} width={400} alt="Picture of toyota camry 1986" />
+                <Image className="rounded-md bg-black h-full max-h-52 object-contain" src={"/images/" + service.model.toLowerCase() + service.year + ".jpg"} height={500} width={400} alt={"Picture of " + service.make + " " + service.model + " " + service.year} />
               </div>
               <div className="flex flex-col ml-4 text-black flex-1 justify-evenly">
                 <div className="flex flex-row">
@@ -77,19 +86,15 @@ export default async function Services() {
                 </div>
                 <div className="flex flex-row gap-4">
                   <span className="flex flex-row self-center content-center">Pracownik: </span>
-                  {//<select className="bg-purple-601 rounded-md shadow-md text-white px-4 py-1 w-fit" name="worker" onChange={(e) => changeWorker(e, 1)}>
-                    //   <option value="adam_nowak">Adam Nowak</option>
-                    //   <option value="grazyna_nowak">Grażyna Nowak</option>
-                    //   <option value="tomasz_problem">Tomasz Problem</option>
-                    // </select>
-                  }
-                  <a className="flex bg-purple-600 w-fit rounded-md shadow-md text-white px-6 py-1" href={'zlecenia/' + service.id}>Zobacz szczegóły</a></div>
+                  <Select workers={workers} service={service} changeWorker={changeWorker}/>
+                  <a className="flex bg-purple-600 w-fit rounded-md shadow-md text-white px-6 py-1" href={'zlecenie/' + service.id}>Zobacz szczegóły</a>
+                </div>
               </div>
             </div>
           </>
         )
       })}
-      <a className="flex w-fit bg-purple-800 font-bold text-2xl rounded-md shadow-md text-white px-4 py-1" href='zlecenia/nowe'>+ Stwórz nowe zlecenie</a>
+      <a className="flex w-fit bg-purple-800 font-bold text-2xl rounded-md shadow-md text-white px-4 py-1" href='zlecenie/nowe'>+ Stwórz nowe zlecenie</a>
     </>
   )
 }

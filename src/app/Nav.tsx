@@ -6,7 +6,7 @@ export default function Nav() {
       <a className="font-semibold text-xl" href="/">Pachura Motorsport</a>
       <div className="flex flex-row justify-evenly items-center gap-4">
         <a className="bg-purple-500 rounded-md shadow-md text-white px-4 py-1" href="zlecenia/nowe">+ Stwórz nowe zlecenie</a>
-        <a className="underline text-blue-500" href="zlecenia/">Przeglądaj zlecenia</a>
+        <a className="underline text-blue-500" href="/zlecenia/">Przeglądaj zlecenia</a>
         <a className="underline text-blue-500" href="czesci/zamow">Zamów części</a>
         <div className="flex flex-row">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" fill="black" class="w-6 h-6">

@@ -10,15 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Worker {
-  id      Int       @id @unique @default(autoincrement())
-  name    String    @unique
-  role    String
-  Service Service[]
+model workers {
+  id       Int        @id @unique @default(autoincrement())
+  name     String     @unique
+  role     String
+  Services services[]
 }
 
-model Service {
-  id                 Int     @id @unique @default(autoincrement())
+model services {
+  id                 Int                @id @unique @default(autoincrement())
   make               String
   model              String
   year               Int
@@ -27,16 +27,25 @@ model Service {
   owner_name         String
   owner_surname      String
   owner_phone_number String
-  status             Boolean @default(false)
-  worker             Worker  @relation(fields: [workerName], references: [name])
-  workerName         String 
-  jobs               Jobs    @relation(fields: [jobsId], references: [id])
-  jobsId             Int @default(-1)
+  status             Boolean            @default(false)
+  workers            workers            @relation(fields: [workerName], references: [name])
+  workerName         String
+  Jobs               jobs[]
+  JobsToServices     jobs_to_services[]
 }
 
-model Jobs {
-  id      Int       @id @unique @default(autoincrement())
-  name    String
-  price   Int       @default(10000)
-  Service Service[]
+model jobs {
+  id             Int                @id @unique @default(autoincrement())
+  name           String
+  price          Int                @default(10000)
+  Services       services[]
+  JobsToServices jobs_to_services[]
+}
+
+model jobs_to_services {
+  id        Int      @id @unique @default(autoincrement())
+  service   services @relation(fields: [serviceId], references: [id])
+  serviceId Int
+  jobs      jobs     @relation(fields: [jobsId], references: [id])
+  jobsId    Int
 }

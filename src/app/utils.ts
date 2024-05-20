@@ -5,15 +5,58 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
 export const getServices = cache(async () => {
-  const services = await prisma.service.findMany()
+  const services = await prisma.services.findMany()
   return services
 })
 
 export const getService = cache(async (id: number) => {
-  const service = await prisma.service.findUnique({
+  const service = await prisma.services.findUnique({
     where: {
       id: id,
     },
   })
   return service
+})
+
+export const getWorkers = cache(async () => {
+  const workers = await prisma.workers.findMany()
+  return workers
+})
+
+export const getWorker = cache(async (id: number) => {
+  const worker = await prisma.workers.findUnique({
+    where: {
+      id: id,
+    },
+  })
+  return worker
+})
+
+export const updateWorker = cache(async (serviceId: number, workerId: number) => {
+  const workerName = await prisma.workers.findUnique({
+    select: {
+      name: true,
+    },
+    where: {
+      id: workerId
+    }
+  })
+  console.log(`Worker name: ${workerName} service id: ${serviceId}`)
+  const worker = await prisma.services.update({
+    where: {
+      id: serviceId,
+    },
+    data: {
+      workerName: workerName.name,
+    },
+  })
+})
+
+export const getJobsForService = cache(async (serviceId: number) => {
+  const jobs = await prisma.jobs_to_services.findMany({
+    where: {
+      serviceId: serviceId
+    }
+  })
+  return jobs
 })
