@@ -135,3 +135,15 @@ export const getUser = cache(async (email: string) => {
   })
   return res;
 })
+
+export const createUser = cache(async (name: string, surname: string, email: string, password: string, confirm_password: string) => {
+  if (password != confirm_password) return false;
+  const res = await prisma.users.create({
+    data: {
+      name: name + " " + surname,
+      email: email,
+      password: password,
+    },
+  })
+  return res
+})

@@ -1,8 +1,20 @@
+"use client"
 import React from 'react'
+import bcrypt from "bcryptjs";
 
 export default function Register() {
   return (
-    <form>
+    <form action={async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const password = bcrypt.hashSync(formData.get("password"), 8)
+      const user = {
+        name: formData.get("name") + formData.get("surname"),
+        email: formData.get("email"),
+        password: password
+      }
+      await createUser()
+    }}>
       <label htmlFor="name">Imie</label>
       <input type="text" name="name" minLength={3} maxLength={64}></input>
       <label htmlFor="surname">Nazwisko</label>
