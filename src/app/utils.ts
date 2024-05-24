@@ -25,10 +25,12 @@ export const addService = cache(async (form: FormData) => {
       model: form.model,
       year: Number.parseInt(form.year),
       engine: form.engine,
+      vin: form.vin,
+      color: form.color,
+      plate: form.plate,
       owner_name: form.name,
       owner_surname: form.surname,
       owner_phone_number: form.phone,
-      vin: form.vin,
       workers: {
         connect: {
           id: 1,
@@ -82,6 +84,7 @@ export const getJobsForService = cache(async (serviceId: number) => {
         select: {
           name: true,
           price: true,
+          time: true,
         },
       },
     },

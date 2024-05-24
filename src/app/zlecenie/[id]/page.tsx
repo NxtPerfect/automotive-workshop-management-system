@@ -8,6 +8,8 @@ export default async function Page({ params }: {params: {id: number}}) {
   const service = await getService(Number.parseInt(params.id))
   const jobs = await getJobsForService(Number.parseInt(params.id))
   const allJobs = await getJobs()
+  let totalPrice = 0;
+  let totalTime = 0;
   async function updateServiceStatus(serviceId: number) {
     'use server'
     console.log("Updating service" , serviceId, "to finished");
@@ -33,6 +35,8 @@ export default async function Page({ params }: {params: {id: number}}) {
             <h2 className="text-2xl font-bold content-center mr-1">{service.make + " " + service.model}</h2><span className="flex mr-4 self-end">{service.year}</span><p className="flex self-end">{service.engine}l</p>
           </div>
           <div className="flex flex-row max-w-[15svw]"><span className="basis-1/2 flex-shrink-0 content-center">Nr. VIN:</span><p className="basis-1/2">{service.vin}</p></div>
+          <div className="flex flex-row max-w-[15svw]"><span className="basis-1/2 flex-shrink-0 content-center">Nr. Rejestracyjny:</span><p className="basis-1/2">{service.plate}</p></div>
+          <div className="flex flex-row max-w-[15svw]"><span className="basis-1/2 flex-shrink-0 content-center">Kolor:</span><p className="basis-1/2">{service.color}</p></div>
           <div className="flex flex-row flex-nowrap content-center max-w-[15svw]"><span className="basis-1/2">Właściciel:</span><div className="flex flex-col flex-grow basis-1/2"><span className="content-center mr-2 whitespace-nowrap">{service.owner_name + " " + service.owner_surname}</span>
             <span className="flex flex-row content-center whitespace-nowrap">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -76,17 +80,27 @@ export default async function Page({ params }: {params: {id: number}}) {
             <tr className="border-black border-2 p-2">
               <th className="border-black border-2 px-4 bg-purple-200">Nr.</th>
               <th className="border-black border-2 px-4 bg-purple-200">Wykonana usługa</th>
+              <th className="border-black border-2 px-4 bg-purple-200">Roboczogodziny</th>
               <th className="border-black border-2 px-4 bg-purple-200">Cena (pln)</th>
             </tr>
             {jobs.map((j, id)=> {
+                totalPrice += Number.parseInt(j.jobs.price.toFixed(2))
+                totalTime += Number.parseInt(j.jobs.time.toFixed(2))
                 return(
                   <tr key={id} className="border-black border-2 p-2 bg-purple-500">
                     <td className="p-1 text-white">{id+1}</td>
                     <td className="border-black border-2 p-1 text-white">{j.jobs.name}</td>
+                    <td className="border-black border-2 p-1 text-white">{(j.jobs.time/60.0).toFixed(2)}</td>
                     <td className="p-1 text-white">{j.jobs.price.toFixed(2)}</td>
                   </tr>
                 )
             })}
+              <tr className="border-black border-2 p-2 bg-purple-300">
+                <td className="p-1 text-black">-</td>
+                <td className="font-bold text-black border-black border-2 p-1">Razem</td>
+                <td className="border-black border-2 p-1 text-black">{totalTime.toFixed(2)}</td>
+                <td className="p-1 text-black">{totalPrice.toFixed(2)}</td>
+              </tr>
             </tbody>
           </table>
           {!service.status ? (
