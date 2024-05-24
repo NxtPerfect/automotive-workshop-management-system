@@ -4,5 +4,5 @@ import { authConfig } from "./auth.config";
 export default NextAuth(authConfig).auth;
 
 export const config = {
-  matches: ['/zlecenia', '/zlecenie/*', '/czesci/*']
+  matches: ['/zlecenia', '/zlecenie/:id', '/czesci/(.*)']
 }
