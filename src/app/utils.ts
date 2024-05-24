@@ -112,7 +112,7 @@ export const addJobs = cache(async (jobId: number, serviceId: number) => {
       },
     },
   })
-  return res
+  return res;
 })
 
 export const setFinished = cache(async (serviceId: number) => {
@@ -124,5 +124,14 @@ export const setFinished = cache(async (serviceId: number) => {
       status: true,
     },
   })
-  return res
+  return res;
+})
+
+export const getUser = cache(async (email: string) => {
+  const res = await prisma.users.findUnique({
+    where: {
+      email: email
+    }
+  })
+  return res;
 })

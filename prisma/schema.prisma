@@ -23,9 +23,9 @@ model services {
   model              String
   year               Int
   engine             String
-  color              String @default("czarny")
+  color              String             @default("czarny")
   vin                String
-  plate             String @default("xyz1234")
+  plate              String             @default("xyz1234")
   owner_name         String
   owner_surname      String
   owner_phone_number String
@@ -42,7 +42,7 @@ model jobs {
   price          Int                @default(10000)
   time           Int                @default(60)
   parts          parts              @relation(fields: [partId], references: [id])
-  partId         Int @default(0)
+  partId         Int                @default(0)
   Services       services[]
   JobsToServices jobs_to_services[]
 }
@@ -60,4 +60,11 @@ model parts {
   name     String
   quantity Int    @default(1)
   jobs     jobs[]
+}
+
+model users {
+  id       Int    @id @unique @default(autoincrement())
+  name     String
+  email    String
+  password String
 }

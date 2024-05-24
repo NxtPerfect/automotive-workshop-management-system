@@ -6,4 +6,5 @@ i thought about making the first elements have same flex basis, so they have sam
 - [x] możliwość zmiany statusu na skończone
 - [x] dodanie nowego zlecenia, tak jak już jest tylko jako forms
 - [x] refresh page on adding job and new service
-- [ ] Maybe a login?
+- [/] Maybe a login?
+    - [ ] [continue](https://nextjs.org/learn/dashboard-app/adding-authentication#updating-the-login-form)
