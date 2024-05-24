@@ -1,8 +1,10 @@
 "use client"
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function Form({ addService }) {
-  function handleSubmit(e) {
+  const router = useRouter();
+  async function handleSubmit(e) {
       e.preventDefault();
       const formData = new FormData(e.target);
       const data = {
@@ -16,7 +18,8 @@ export default function Form({ addService }) {
         vin: formData.get('vin'),
       };
       console.log("Form data:", data);
-      addService(data);
+      await addService(data);
+      router.refresh();
   }
   return (
     <form className="flex flex-col max-w-[40ch] p-8 bg-purple-500 rounded-md mt-4" onSubmit={(e) => handleSubmit(e)}>

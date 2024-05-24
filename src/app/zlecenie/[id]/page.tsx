@@ -12,14 +12,14 @@ export default async function Page({ params }: {params: {id: number}}) {
     'use server'
     console.log("Updating service" , serviceId, "to finished");
     await setFinished(Number.parseInt(serviceId));
-    return 0
+    return 0;
   }
 
   async function addJob(jobId: number, serviceId: number) {
     'use server'
     console.log("Adding new job", jobId, "to", serviceId)
     await addJobs(jobId, serviceId)
-    return 0
+    return 0;
   }
 
   return (

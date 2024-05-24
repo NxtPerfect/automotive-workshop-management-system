@@ -1,11 +1,16 @@
 "use client";
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function SelectJob({jobs, serviceId, addJob}) {
+  const router = useRouter();
   return (
     <>
       <span className="text-lg font-semibold mt-4">Dodaj nowe naprawy</span>
-        <select className="w-fit mt-1 p-2 rounded-md shadow-md" onChange={(e) => addJob(Number.parseInt(e.target.selectedOptions[0].value), serviceId)}>
+        <select className="w-fit mt-1 p-2 rounded-md shadow-md" onChange={(e) => {
+        addJob(Number.parseInt(e.target.selectedOptions[0].value), serviceId);
+        router.refresh();
+      }}>
           <option value="Wybierz opcje" selected disabled></option>
           {jobs.map((job) => {
             return (

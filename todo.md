@@ -5,3 +5,4 @@
 i thought about making the first elements have same flex basis, so they have same length, and then moving the other elements to the start, so they align left like that but yea i might try it next time
 - [x] możliwość zmiany statusu na skończone
 - [x] dodanie nowego zlecenia, tak jak już jest tylko jako forms
+- [ ] refresh page on adding job and new service
