@@ -5,7 +5,7 @@ export const authConfig = {
     signIn: '/login',
   },
   callbacks: {
-    authorized({auth, request: {nextUrl}}) {
+    authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       if (nextUrl.pathname.startsWith('/zlecenia') || nextUrl.pathname.startsWith('/zlecenie') || nextUrl.pathname.startsWith('/czesci')) {
         if (isLoggedIn) return true;
@@ -15,5 +15,5 @@ export const authConfig = {
       return true;
     }
   },
-  provider: []
+  providers: [],
 } satisfies NextAuthConfig;

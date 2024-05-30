@@ -1,11 +1,13 @@
-import { signIn } from "../../../auth";
 import AuthError from 'next-auth';
+import { signIn } from 'next-auth/react';
+// import { signIn } from '../../../auth';
 
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
   try {
+    console.log('Sign in', signIn)
     await signIn('credentials', formData);
   } catch (error) {
     if (!error instanceof AuthError) throw error;
@@ -15,7 +17,7 @@ export async function authenticate(
         return 'Invalid Credentials.';
       default:
         console.error(error)
-        return 'Internal server error.';
+        return 'Something went wrong.';
     }
   }
 }

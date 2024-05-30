@@ -128,18 +128,21 @@ export const setFinished = cache(async (serviceId: number) => {
 })
 
 export const getUser = cache(async (email: string) => {
-  const res = await prisma.users.findUnique({
-    where: {
-      email: email
-    }
-  })
-  return res;
+  try {
+    const res = await prisma.users.findUnique({
+      where: {
+        email: email
+      }
+    })
+    return res;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 })
 
 export const createUser = cache(async (name: string, email: string, password: string, confirm_password: string) => {
-  console.log("Before check", password, confirm_password)
   if (password != confirm_password) return false;
-  console.log("Here")
   try {
     const res = await prisma.users.create({
       data: {
@@ -148,7 +151,6 @@ export const createUser = cache(async (name: string, email: string, password: st
         password: password,
       },
     })
-    console.log("Success");
     return res;
   } catch (error) {
     console.error("Got an error", error);
