@@ -1,19 +1,27 @@
 "use client"
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '../lib/actions';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function Form() {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+  const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    signIn('credentials', {
+    const response = await signIn('credentials', {
       email: formData.get("email"),
       password: formData.get("password"),
       redirect: false,
     })
+    if (response?.error) {
+      setErrorMessage(response.error);
+      return null;
+    }
+    router.push('/');
+    router.refresh();
   }
   return (
     <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col max-w-[40ch] p-8 bg-purple-500 rounded-md mt-4 justify-center">

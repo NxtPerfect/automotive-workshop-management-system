@@ -8,4 +8,8 @@ i thought about making the first elements have same flex basis, so they have sam
 - [x] refresh page on adding job and new service
 - [/] Maybe a login?
     - [x] [continue](https://nextjs.org/learn/dashboard-app/adding-authentication#updating-the-login-form)
-    - [/] Currently throws prisma error as if prisma was used on frontend?
+    - [x] Currently throws prisma error as if prisma was used on frontend?
+    - [x] login
+    - [x] register
+    - [x] logout
+    - [/] route protection if not logged in
