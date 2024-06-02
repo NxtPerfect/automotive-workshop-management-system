@@ -42,7 +42,7 @@ model jobs {
   price          Int                @default(10000)
   time           Int                @default(60)
   parts          parts              @relation(fields: [partId], references: [id])
-  partId         Int                @default(0)
+  partId         Int                @default(1)
   Services       services[]
   JobsToServices jobs_to_services[]
 }
