@@ -5,23 +5,24 @@ import React from 'react'
 export default function Form({ addService }) {
   const router = useRouter();
   async function handleSubmit(e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {
-        make: formData.get('make'),
-        model: formData.get('model'),
-        year: formData.get('year'),
-        engine: formData.get('engine'),
-        vin: formData.get('vin'),
-        color: formData.get('color'),
-        plate: formData.get('plate'),
-        name: formData.get('name'),
-        surname: formData.get('surname'),
-        phone: formData.get('phone'),
-      };
-      console.log("Form data:", data);
-      await addService(data);
-      router.refresh();
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = {
+      make: formData.get('make'),
+      model: formData.get('model'),
+      year: formData.get('year'),
+      engine: formData.get('engine'),
+      vin: formData.get('vin'),
+      color: formData.get('color'),
+      plate: formData.get('plate'),
+      name: formData.get('name'),
+      surname: formData.get('surname'),
+      phone: formData.get('phone'),
+    };
+    console.log("Form data:", data);
+    await addService(data);
+    router.push('/zlecenia');
+    router.refresh();
   }
   return (
     <form className="flex flex-col max-w-[40ch] p-8 bg-purple-500 rounded-md mt-4" onSubmit={(e) => handleSubmit(e)}>
