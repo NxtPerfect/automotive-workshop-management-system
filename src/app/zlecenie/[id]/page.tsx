@@ -85,7 +85,7 @@ export default async function Page({ params }: {params: {id: number}}) {
             </tr>
             {jobs.map((j, id)=> {
                 totalPrice += Number.parseInt(j.jobs.price.toFixed(2))
-                totalTime += Number.parseInt(j.jobs.time.toFixed(2))
+                totalTime += Number.parseInt((j.jobs.time/60.0).toFixed(2))
                 return(
                   <tr key={id} className="border-black border-2 p-2 bg-purple-500">
                     <td className="p-1 text-white">{id+1}</td>
