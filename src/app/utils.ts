@@ -157,3 +157,25 @@ export const createUser = cache(async (name: string, email: string, password: st
     return null;
   }
 })
+
+export const getParts = cache(async () => {
+  const res = await prisma.parts.findMany();
+  return res;
+})
+
+export const addPart = cache(async (partId: number, partQuantity: number) => {
+  try {
+    const res = await prisma.parts.update({
+      where: {
+        id: partId,
+      },
+      data: {
+        quantity: { increment: Number.parseInt(partQuantity) },
+      },
+    })
+    return res;
+  } catch (error) {
+    console.error("Got an error", error);
+    return null;
+  }
+})
