@@ -40,6 +40,15 @@ export const addService = cache(async (form: FormData) => {
   })
 })
 
+export const removeService = cache(async (serviceId: number) => {
+  const res = await prisma.services.delete({
+    where: {
+      id: serviceId,
+    },
+  })
+  return res;
+})
+
 export const getWorkers = cache(async () => {
   const workers = await prisma.workers.findMany()
   return workers
@@ -85,6 +94,7 @@ export const getJobsForService = cache(async (serviceId: number) => {
           name: true,
           price: true,
           time: true,
+          id: true,
         },
       },
     },
@@ -110,6 +120,15 @@ export const addJobs = cache(async (jobId: number, serviceId: number) => {
           id: jobId,
         },
       },
+    },
+  })
+  return res;
+})
+
+export const removeJob = cache(async (jobId: number) => {
+  const res = await prisma.jobs.delete({
+    where: {
+      id: jobId,
     },
   })
   return res;

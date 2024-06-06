@@ -1,7 +1,8 @@
 import { ChangeEvent } from "react";
 import Image from "next/image";
-import { getServices, getWorkers, updateWorker } from "../utils";
+import { getServices, getWorkers, removeService, updateWorker } from "../utils";
 import Select from "./Select";
+import Trash from "./trash";
 
 export const revalidate = 300;
 
@@ -34,8 +35,13 @@ export default async function Services() {
 
   async function changeWorker(serviceId: number, workerId: number) {
     'use server'
-    console.log(`New worker for job ${serviceId} is ${workerId}`)
-    await updateWorker(serviceId, workerId)
+    await updateWorker(serviceId, workerId);
+    return 0;
+  }
+
+  async function delService(id: number) {
+    'use server'
+    await removeService(id);
     return 0;
   }
 
@@ -87,10 +93,11 @@ export default async function Services() {
                 </div>
                 <div className="flex flex-row gap-4">
                   <span className="flex flex-row self-center content-center">Pracownik: </span>
-                  <Select workers={workers} service={service} changeWorker={changeWorker}/>
+                  <Select workers={workers} service={service} changeWorker={changeWorker} />
                   <a className="flex bg-purple-600 hover:bg-purple-700 active:bg-purple-500 transition w-fit rounded-md shadow-md text-white px-6 py-1" href={'zlecenie/' + service.id}>Zobacz szczegóły</a>
                 </div>
               </div>
+              <Trash delService={delService} service_id={service.id} />
             </div>
           </>
         )

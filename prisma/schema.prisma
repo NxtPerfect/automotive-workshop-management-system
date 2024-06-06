@@ -30,7 +30,7 @@ model services {
   owner_surname      String
   owner_phone_number String
   status             Boolean            @default(false)
-  workers            workers            @relation(fields: [workerName], references: [name])
+  workers            workers            @relation(fields: [workerName], references: [name], onDelete: NoAction, onUpdate: NoAction)
   workerName         String
   Jobs               jobs[]
   JobsToServices     jobs_to_services[]
@@ -41,7 +41,7 @@ model jobs {
   name           String
   price          Int                @default(10000)
   time           Int                @default(60)
-  parts          parts              @relation(fields: [partId], references: [id])
+  parts          parts              @relation(fields: [partId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   partId         Int                @default(1)
   Services       services[]
   JobsToServices jobs_to_services[]
@@ -49,9 +49,9 @@ model jobs {
 
 model jobs_to_services {
   id        Int      @id @unique @default(autoincrement())
-  service   services @relation(fields: [serviceId], references: [id])
+  service   services @relation(fields: [serviceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   serviceId Int
-  jobs      jobs     @relation(fields: [jobsId], references: [id])
+  jobs      jobs     @relation(fields: [jobsId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   jobsId    Int
 }
 
