@@ -1,4 +1,4 @@
-import { addJobs, getJobs, getJobsForService, getService, removeJob, setFinished } from '@/app/utils'
+import { addJobs, getJobs, getJobsForService, getService, removeJob, removeService, setFinished } from '@/app/utils'
 import Image from 'next/image'
 import React from 'react'
 import Status from './Status'
@@ -47,7 +47,7 @@ export default async function Page({ params }: { params: { id: number } }) {
           <div className="flex flex-row">
             <h2 className="text-2xl font-bold content-center mr-1">{service.make + " " + service.model}</h2><span className="flex mr-4 self-end">{service.year}</span><p className="flex self-end">{service.engine}l</p>
             <div className="ml-12">
-              <Trash key={service.id} delService={delService} service_id={service.id} />
+              <Trash key={service.id} delJob={delService} jobId={service.id} />
             </div>
           </div>
           <div className="flex flex-row max-w-[15svw]"><span className="basis-1/2 flex-shrink-0 content-center">Nr. VIN:</span><p className="basis-1/2">{service.vin}</p></div>
