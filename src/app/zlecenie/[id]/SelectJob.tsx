@@ -4,6 +4,7 @@ import React from 'react'
 
 export default function SelectJob({jobs, serviceId, addJob}) {
   const router = useRouter();
+  console.log(jobs, serviceId, addJob);
   return (
     <>
       <span className="text-lg font-semibold mt-4">Dodaj nowe naprawy</span>
