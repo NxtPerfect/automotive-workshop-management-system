@@ -16,9 +16,9 @@ npm run dev
 ```
 
 ## Preview
-![./showcase/ShowcaseLogin.jpeg]
-![./showcase/ShowcaseMainPage.jpeg]
-![./showcase/ShowcaseAddService.jpeg]
-![./showcase/ShowcaseServices.jpeg]
-![./showcase/ShowcaseFinishedServiceDetail.jpeg]
-![./showcase/ShowcaseInProgressServiceDetail.jpeg]
+![](./showcase/ShowcaseLogin.jpeg)
+![](./showcase/ShowcaseMainPage.jpeg)
+![](./showcase/ShowcaseAddService.jpeg)
+![](./showcase/ShowcaseServices.jpeg)
+![](./showcase/ShowcaseFinishedServiceDetail.jpeg)
+![](./showcase/ShowcaseInProgressServiceDetail.jpeg)
