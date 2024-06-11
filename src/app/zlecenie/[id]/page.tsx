@@ -41,6 +41,7 @@ export default async function Page({ params }: { params: { id: number } }) {
     <>
       <div className="flex flex-row bg-purple-300 p-4 rounded-md w-[75svw] h-full mb-4" key={service.id}>
         <div className="flex relative overflow-hidden flex-row h-full">
+          {}
           <Image className="rounded-md bg-black h-full object-contain" src={"/images/" + service.model.toLowerCase() + service.year + ".jpg"} height={600} width={400} alt={"Picture of " + service.make + " " + service.model + " " + service.year} />
         </div>
         <div className="flex flex-col ml-4 text-black flex-1 justify-evenly">
